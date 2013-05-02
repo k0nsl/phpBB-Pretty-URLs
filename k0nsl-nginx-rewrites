@@ -1,0 +1,22 @@
+## k0nsl: START phpBB rewrites
+location / {
+root /home/k0nsl/location/;
+index index.php index.html index.htm;
+rewrite ^/t([0-9]+)-[^_]+?\.html$ /viewtopic.php?t=$1 last;
+rewrite ^/t([0-9]+)-[^_]+?_([0-9]+)\.html$ /viewtopic.php?t=$1&start=$2 last;
+rewrite ^/f([0-9]+)-[^_]+?_([0-9]+)\.html$ /viewforum.php?f=$1&start=$2 last;
+rewrite ^/f([0-9]+)-[^_]+?\.html$ /viewforum.php?f=$1 last;
+rewrite ^/p([0-9]+)-[^_]+?\.html$ /viewtopic.php?p=$1 last;
+rewrite ^/u([0-9]+)-.+?\.html$ /memberlist.php?mode=viewprofile&u=$1 last;
+rewrite ^/g([0-9]+)-.+?\.html$ /memberlist.php?mode=group&g=$1 last;
+rewrite ^/leaders.html$ /memberlist.php?mode=leaders last;
+rewrite ^/egosearch.html$ /search.php?search_id=egosearch last;
+rewrite ^/unanswered.html$ /search.php?search_id=unanswered last;
+rewrite ^/unreadposts.html$ /search.php?search_id=unreadposts last;
+rewrite ^/newposts.html$ /search.php?search_id=newposts last;
+rewrite ^/active-topics.html$ /search.php?search_id=active_topics last;
+rewrite ^/faq.html$ /faq.php last;
+rewrite ^/viewonline.html$ /viewonline.php last;
+rewrite ^/viewonline-sg.html$ /viewonline.php?sg=1 last;
+}
+## k0nsl: END phpBB rewrites
