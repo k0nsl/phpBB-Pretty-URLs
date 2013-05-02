@@ -48,7 +48,7 @@ $forum_id = $topic_id = 0;
 function url_slug($str, $options = array()) {
 	// Make sure string is in UTF-8 and strip invalid UTF-8 characters
 	$str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
-	
+
 	$defaults = array(
 		'delimiter' => '-',
 		'limit' => null,
@@ -56,10 +56,10 @@ function url_slug($str, $options = array()) {
 		'replacements' => array(),
 		'transliterate' => false,
 	);
-	
+
 	// Merge options
 	$options = array_merge($defaults, $options);
-	
+
 	$char_map = array(
 		// Latin
 		'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'AE', 'Ç' => 'C', 
@@ -126,27 +126,27 @@ function url_slug($str, $options = array()) {
 		'ā' => 'a', 'č' => 'c', 'ē' => 'e', 'ģ' => 'g', 'ī' => 'i', 'ķ' => 'k', 'ļ' => 'l', 'ņ' => 'n',
 		'š' => 's', 'ū' => 'u', 'ž' => 'z'
 	);
-	
+
 	// Make custom replacements
 	$str = preg_replace(array_keys($options['replacements']), $options['replacements'], $str);
-	
+
 	// Transliterate characters to ASCII
 	if ($options['transliterate']) {
 		$str = str_replace(array_keys($char_map), $char_map, $str);
 	}
-	
+
 	// Replace non-alphanumeric characters with our delimiter
 	$str = preg_replace('/[^\p{L}\p{Nd}]+/u', $options['delimiter'], $str);
-	
+
 	// Remove duplicate delimiters
 	$str = preg_replace('/(' . preg_quote($options['delimiter'], '/') . '){2,}/', '$1', $str);
-	
+
 	// Truncate slug to max. characters
 	$str = mb_substr($str, 0, ($options['limit'] ? $options['limit'] : mb_strlen($str, 'UTF-8')), 'UTF-8');
-	
+
 	// Remove delimiter from ends
 	$str = trim($str, $options['delimiter']);
-	
+
 	return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
 }
 
