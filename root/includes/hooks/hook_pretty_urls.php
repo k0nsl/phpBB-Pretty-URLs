@@ -190,7 +190,7 @@ function fix_href($matches)
 		$this_script = substr($url['path'], strlen($phpbb_root_path), strlen($url['path']) - strlen($phpEx) - 1 - strlen($phpbb_root_path));
 		switch($this_script)
 		{
-			/*case 'index':
+			case 'index':
 				$replace = $phpbb_root_path;
 				break;
 			case 'viewforum':
@@ -199,7 +199,7 @@ function fix_href($matches)
 				unset($query['f']);
 				unset($query['start']);
 
-				break;*/
+				break;
 			case 'viewtopic':
 				if ($script_name == 'viewtopic' && @$query['t'] == $topic_id)
 				{
@@ -229,7 +229,7 @@ function fix_href($matches)
 				unset($query['start']);
 
 				break;
-			/*case 'memberlist':
+			case 'memberlist':
 				switch(@$query['mode'])
 				{
 					case 'leaders':
@@ -279,7 +279,7 @@ function fix_href($matches)
 				break;
 			case 'faq':
 				$replace = 'faq.html';
-				break;*/
+				break;
 		}
 
 		if ($replace && sizeof($query))
@@ -298,18 +298,18 @@ function fix_href($matches)
  */
 function pretty_url_tpl_hook(&$hook, $handle, $include_once = true)
 {
-	global $script_name, $template, $phpbb_root_path, $phpEx;
+	global $script_name, $phpbb_root_path, $phpEx; /* $template is not needed here */
 
 	$script_name = basename($_SERVER['SCRIPT_NAME']);
 	$script_name = substr($script_name, 0, strlen($script_name) - 1 - strlen($phpEx));
 
 	switch($script_name)
 	{
-		/*case 'viewforum':
+		case 'viewforum':
 			global $forum_data, $forum_name, $forum_id;
 			$forum_name = $forum_data['forum_name'];
 			$forum_id = $forum_data['forum_id'];
-			break;*/
+			break;
 		case 'viewtopic':
 			global $topic_data, $topic_title, $topic_id;
 			$topic_title = $topic_data['topic_title'];
