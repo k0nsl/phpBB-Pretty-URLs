@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/ @version $Id: stargate_041.xml 315 2009-01-10 05:43:06Z michaelo $ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+		<title lang="en">Pretty URLs</title>
+
+		<description lang="en">Make your phpBB forum's URLs pretty!</description>
+
+		<author-notes lang="en">
+			This is very ALPHA-stage code at this poing. Do not use it unless you understand the implications.
+		</author-notes>
+
+		<author-group>
+			<author>
+				<username>Sam</username>
+				<realname>Sam Thompson</realname>
+				<homepage>http://emberlabs.org/</homepage>
+				<email>sam@emberlabs.org</email>
+			</author>
+		</author-group>
+
+		<mod-version>0.0.1</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.11</target-version>
+		</installation>
+
+		<history>
+			<entry>
+				<date>2012-11-21</date>
+				<rev-version>0.0.1</rev-version>
+				<changelog lang="en">
+					<change>First APLHA test</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2013-1-29</date>
+				<rev-version>0.0.2</rev-version>
+				<changelog lang="en">
+					<change>Fixed the "Tried to redirect to potentially insecure url." General Error</change>
+					<change>Fixed infinite redirects with non-ascii characters in favor of a transliterate implementation</change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+
+	<action-group>
+		<copy>
+			<file from="root/includes/hooks/hook_pretty_urls.php" to="includes/hooks/hook_pretty_urls.php" />
+		</copy>
+
+		<open src=".htaccess">
+			<edit>
+			<find><![CDATA[<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>]]></find>
+			<action type="after-add"><![CDATA[
+
+# phpBB Pretty URLs
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{THE_REQUEST} ^([A-Z]{3,9})\ (.*)/index.php[^\ ]*\ HTTP
+	RewriteRule ^index\.php$ %2/ [R=301,L]
+	RewriteRule ^f([0-9]+)-[^_]+?\.html$ viewforum.php?f=$1
+	RewriteRule ^f([0-9]+)-[^_]+?_([0-9]+)\.html$ viewforum.php?f=$1&start=$2
+	RewriteRule ^t([0-9]+)-[^_]+?\.html$ viewtopic.php?t=$1
+	RewriteRule ^t([0-9]+)-[^_]+?_([0-9]+)\.html$ viewtopic.php?t=$1&start=$2
+	RewriteRule ^p([0-9]+)-[^_]+?\.html$ viewtopic.php?p=$1
+	RewriteRule ^u([0-9]+)-.+?\.html$ memberlist.php?mode=viewprofile&u=$1
+	RewriteRule ^g([0-9]+)-.+?\.html$ memberlist.php?mode=group&g=$1
+	RewriteRule ^leaders.html$ memberlist.php?mode=leaders
+	RewriteRule ^egosearch.html$ search.php?search_id=egosearch
+	RewriteRule ^unanswered.html$ search.php?search_id=unanswered
+	RewriteRule ^unreadposts.html$ search.php?search_id=unreadposts
+	RewriteRule ^newposts.html$ search.php?search_id=newposts
+	RewriteRule ^active-topics.html$ search.php?search_id=active_topics
+	RewriteRule ^faq.html$ faq.php
+	RewriteRule ^viewonline.html$ viewonline.php
+	RewriteRule ^viewonline-sg.html$ viewonline.php?sg=1
+</IfModule>
+]]></action>
+			</edit>
+		</open>
+
+		<diy-instructions lang="en-gb">Clear the cache via the ACP</diy-instructions>
+	</action-group>
+</mod>
