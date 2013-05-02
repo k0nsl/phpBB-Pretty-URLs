@@ -1,3 +1,6 @@
+*** I graciously accept code contributions from other GitHub users. ***
+
+
 Author details:
 
 Username:
