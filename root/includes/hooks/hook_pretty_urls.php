@@ -296,9 +296,10 @@ function fix_href($matches)
 /*
  * pretty_url_tpl_hook
  */
-function pretty_url_tpl_hook(&$hook, $handle, $include_once = true)
+ 
+function pretty_url_tpl_hook(&$hook, $handle, $include_once = true, $template)
 {
-	global $script_name, $template, $phpbb_root_path, $phpEx;
+   global $script_name, $phpbb_root_path, $phpEx;
 
 	$script_name = basename($_SERVER['SCRIPT_NAME']);
 	$script_name = substr($script_name, 0, strlen($script_name) - 1 - strlen($phpEx));
