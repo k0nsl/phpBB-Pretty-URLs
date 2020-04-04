@@ -1,16 +1,14 @@
-*** I graciously accept code contributions from other GitHub users. ***
+<b>I graciously accept code contributions from other GitHub users.</b>
 
 
-Author details:
+Author(s):
 
 Name: Sam Thompson
-
-Email: sam@emberlabs.org
-
-WWW: http://emberlabs.org/
+E-mail: sam@emberlabs.org
+Web page: http://emberlabs.org/
     
-Modification description: Make your phpBB forum's URLs pretty!
+Description: Make your phpBB forum's URLs pretty!
 
 Additional information: https://www.phpbb.com/community/viewtopic.php?f=70&t=2165971#p13203388
 
-With contributions by k0nsl (i.am@k0nsl.org).
+With contributions by k0nsl (<b>i.am@k0nsl.org</b> or https://k0nsl.org/blpg/).
